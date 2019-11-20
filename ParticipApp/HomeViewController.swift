@@ -60,8 +60,9 @@ class HomeViewController: UIViewController {
         
     }
     
-    // Updates constraints of homeView and menuView when button pressed
+    // Opens side menu
     @IBAction func openMenu(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = true;
         menuLeadingConstraint.constant = 0
         menuButton.isEnabled = false
         menuButton.tintColor = UIColor.clear
@@ -74,7 +75,9 @@ class HomeViewController: UIViewController {
         })
     }
     
+    // Closes side menu
     @IBAction func closeMenu(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = false;
         menuLeadingConstraint.constant = -375
         homeButton.isEnabled = false
         homeButton.alpha = 0
