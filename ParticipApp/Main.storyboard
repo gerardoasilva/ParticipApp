@@ -279,7 +279,7 @@ EENvbnRyYXNlw7FhA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YnF-wm-a7x" userLabel="MenuView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="-375" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wi0-fO-q3g" userLabel="Menu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="896"/>
@@ -659,7 +659,7 @@ EENvbnRyYXNlw7FhA
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0F4-4f-o1e" userLabel="HomeView">
-                                <rect key="frame" x="375" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" showsPointsOfInterest="NO" id="0l8-P4-BlY">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -676,6 +676,9 @@ EENvbnRyYXNlw7FhA
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMz-fv-cCh" userLabel="HomeButton">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="896"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="closeMenu:" destination="Am1-ea-1LQ" eventType="touchUpInside" id="lgZ-3s-Neq"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTr-ph-UcS" userLabel="Report">
                                         <rect key="frame" x="325" y="725" width="64" height="64"/>
@@ -708,7 +711,7 @@ EENvbnRyYXNlw7FhA
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="0F4-4f-o1e" firstAttribute="top" secondItem="BfP-tF-RSR" secondAttribute="top" id="8qL-mS-Hq5"/>
-                            <constraint firstItem="YnF-wm-a7x" firstAttribute="leading" secondItem="1nR-Tl-zAZ" secondAttribute="leading" id="GhE-av-L5u"/>
+                            <constraint firstItem="YnF-wm-a7x" firstAttribute="leading" secondItem="1nR-Tl-zAZ" secondAttribute="leading" constant="-375" id="GhE-av-L5u"/>
                             <constraint firstItem="0F4-4f-o1e" firstAttribute="leading" secondItem="YnF-wm-a7x" secondAttribute="trailing" constant="-39" id="IeW-tT-PYh"/>
                             <constraint firstAttribute="bottom" secondItem="0F4-4f-o1e" secondAttribute="bottom" id="Wp8-6l-gnG"/>
                             <constraint firstItem="YnF-wm-a7x" firstAttribute="top" secondItem="BfP-tF-RSR" secondAttribute="top" id="f8M-L3-dw3"/>
@@ -734,6 +737,7 @@ EENvbnRyYXNlw7FhA
                         <outlet property="menuView" destination="YnF-wm-a7x" id="p8g-cH-m4C"/>
                         <outlet property="preferencesButton" destination="fUO-lA-sdI" id="82D-2u-mb8"/>
                         <outlet property="recompensas" destination="65l-fB-oYk" id="3Wq-2b-qPd"/>
+                        <outlet property="reportButton" destination="qTr-ph-UcS" id="xFR-OY-oS9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FBe-oV-QeP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

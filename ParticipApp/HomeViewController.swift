@@ -12,19 +12,24 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    // Home outlets
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var homeView: UIView!
+    @IBOutlet weak var recompensas: UIButton!
+    @IBOutlet weak var reportButton: UIButton!
+    
+    // Menu outlets
+    @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var preferencesButton: UIButton!
     @IBOutlet weak var inboxButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var recompensas: UIButton!
     
-    // Variable to know if the side menu is showing
-    var menuShowing = false
+    // Constant to store corner radius for elements
+    let cornerR: CGFloat = 15
     
+    // MapKit
     fileprivate let locationManager: CLLocationManager = CLLocationManager()
     let regionInMeters: Double = 500
     
@@ -33,44 +38,53 @@ class HomeViewController: UIViewController {
         // Checks location services
         checkLocationServices()
         
-        // HomeView Shadow
+    // MARK: - HOME ELEMENTS
+        
+        //Shadow
         homeView.layer.shadowOpacity = 1
+        reportButton.layer.shadowOpacity = 1
         
         // Radius
         homeView.layer.shadowRadius = 5
-        homeView.layer.cornerRadius = 15
-        mapView.layer.cornerRadius = 15
+        homeView.layer.cornerRadius = cornerR
+        reportButton.layer.cornerRadius = 0.5 * reportButton.bounds.width
+        
+    // MARK: - MENU ELEMENTS
+        
+        // Radius - menu elements
+        recompensas.layer.cornerRadius = cornerR
+        mapView.layer.cornerRadius = cornerR
         preferencesButton.layer.cornerRadius = 0.5 * preferencesButton.bounds.size.width
         inboxButton.layer.cornerRadius = 0.5 * inboxButton.bounds.size.width
-        recompensas.layer.cornerRadius = 15
+        homeButton.layer.cornerRadius = cornerR
         
     }
     
     // Updates constraints of homeView and menuView when button pressed
     @IBAction func openMenu(_ sender: Any) {
-        if menuShowing { // Hides menu
+        menuLeadingConstraint.constant = 0
+        menuButton.isEnabled = false
+        menuButton.tintColor = UIColor.clear
+        homeButton.isEnabled = true
+        homeButton.alpha = 0.5
             
-            //homeLeadingConstraint.constant = 0
-            menuLeadingConstraint.constant = -375
-            homeButton.isEnabled = false
-            homeButton.alpha = 0
-        } else { // Shows menu
-            
-            //homeLeadingConstraint.constant = 240
-            menuLeadingConstraint.constant = 0
-            menuButton.isEnabled = false
-            menuButton.tintColor = UIColor.clear
-            
-            
-            
-            
-        }
         // Menu slide animation
         UIView.animate(withDuration: 0.15, animations: {
             self.view.layoutIfNeeded()
         })
-        // Updates menu status
-        menuShowing = !menuShowing
+    }
+    
+    @IBAction func closeMenu(_ sender: Any) {
+        menuLeadingConstraint.constant = -375
+        homeButton.isEnabled = false
+        homeButton.alpha = 0
+        menuButton.isEnabled = true
+        menuButton.tintColor = UIColor.systemBlue
+        
+        // Menu slide animation
+        UIView.animate(withDuration: 0.15, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     func setUpLocationManager() {
