@@ -26,6 +26,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var inboxButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     
+    // Categories Menu Outlets
+    @IBOutlet weak var categoriesMenuView: UIView!
+    
+    
     // Variable to know if menu is showing
     var menuIsShowing: Bool = false
     
