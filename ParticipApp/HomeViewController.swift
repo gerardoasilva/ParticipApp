@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     // Home outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var homeView: UIView!
+    @IBOutlet weak var openMenuView: UIView!
     @IBOutlet weak var recompensas: UIButton!
     @IBOutlet weak var reportButton: UIButton!
     
@@ -26,6 +27,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var inboxButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     
+    // Variable to know if menu is showing
+    var menuIsShowing: Bool = false
+    
     // Constant to store corner radius for elements
     let cornerR: CGFloat = 15
     
@@ -35,6 +39,18 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Left edge gesture recognizer
+        let leftEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(leftScreenEdgeSwiped))
+        leftEdgePan.edges = .left
+        
+        // Right edge gesture recognizer
+        let rightEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(rightScreenEdgeSwiped))
+        rightEdgePan.edges = .right
+        
+        // Add gesture recognizer to view
+        openMenuView.addGestureRecognizer(leftEdgePan)
+        
         // Checks location services
         checkLocationServices()
         
@@ -60,6 +76,15 @@ class HomeViewController: UIViewController {
         
     }
     
+    // Left edge pan gesture called
+    @objc func leftScreenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            if !menuIsShowing {
+                openMenu(self)
+            }
+        }
+    }
+    
     // Opens side menu
     @IBAction func openMenu(_ sender: Any) {
         self.navigationController?.navigationBar.isHidden = true;
@@ -68,11 +93,15 @@ class HomeViewController: UIViewController {
         menuButton.tintColor = UIColor.clear
         homeButton.isEnabled = true
         homeButton.alpha = 0.5
+        openMenuView.alpha = 0
             
         // Menu slide animation
         UIView.animate(withDuration: 0.15, animations: {
             self.view.layoutIfNeeded()
         })
+        
+        // Updates var menuIsShowing
+        menuIsShowing = !menuIsShowing
     }
     
     // Closes side menu
@@ -83,11 +112,15 @@ class HomeViewController: UIViewController {
         homeButton.alpha = 0
         menuButton.isEnabled = true
         menuButton.tintColor = UIColor.systemBlue
+        openMenuView.alpha  = 1
         
         // Menu slide animation
         UIView.animate(withDuration: 0.15, animations: {
             self.view.layoutIfNeeded()
         })
+        
+        // Updates var menuIsShowing
+        menuIsShowing = !menuIsShowing
     }
     
     func setUpLocationManager() {
