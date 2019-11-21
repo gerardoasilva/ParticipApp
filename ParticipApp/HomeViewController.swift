@@ -16,7 +16,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var openMenuView: UIView!
-    @IBOutlet weak var recompensas: UIButton!
     @IBOutlet weak var reportButton: UIButton!
     
     // Menu outlets
@@ -44,10 +43,6 @@ class HomeViewController: UIViewController {
         let leftEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(leftScreenEdgeSwiped))
         leftEdgePan.edges = .left
         
-        // Right edge gesture recognizer
-        let rightEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(rightScreenEdgeSwiped))
-        rightEdgePan.edges = .right
-        
         // Add gesture recognizer to view
         openMenuView.addGestureRecognizer(leftEdgePan)
         
@@ -68,7 +63,6 @@ class HomeViewController: UIViewController {
     // MARK: - MENU ELEMENTS
         
         // Radius - menu elements
-        recompensas.layer.cornerRadius = cornerR
         mapView.layer.cornerRadius = cornerR
         preferencesButton.layer.cornerRadius = 0.5 * preferencesButton.bounds.size.width
         inboxButton.layer.cornerRadius = 0.5 * inboxButton.bounds.size.width
