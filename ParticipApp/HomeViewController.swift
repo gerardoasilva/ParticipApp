@@ -28,7 +28,19 @@ class HomeViewController: UIViewController {
     
     // Categories Menu Outlets
     @IBOutlet weak var categoriesMenuView: UIView!
-    
+    @IBOutlet weak var catBtn00: UIButton!
+    @IBOutlet weak var catBtn01: UIButton!
+    @IBOutlet weak var catBtn02: UIButton!
+    @IBOutlet weak var catBtn10: UIButton!
+    @IBOutlet weak var catBtn11: UIButton!
+    @IBOutlet weak var catBtn12: UIButton!
+    @IBOutlet weak var catBtn20: UIButton!
+    @IBOutlet weak var catBtn21: UIButton!
+    @IBOutlet weak var catBtn22: UIButton!
+    @IBOutlet weak var catBtn30: UIButton!
+    @IBOutlet weak var catBtn31: UIButton!
+    @IBOutlet weak var catBtn32: UIButton!
+    @IBOutlet weak var closeCatBtn: UIButton!
     
     // Variable to know if menu is showing
     var menuIsShowing: Bool = false

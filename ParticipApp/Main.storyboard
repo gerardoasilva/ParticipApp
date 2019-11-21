@@ -523,10 +523,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-wi-IKr" userLabel="Exit View">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbL-3o-V0K" userLabel="Traffic">
                                                 <rect key="frame" x="43" y="170" width="80" height="80"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -740,13 +736,9 @@
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                 <state key="normal" title="CERRAR"/>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kj6-2a-7rr">
-                                                <rect key="frame" x="43" y="170" width="80" height="97"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="3WC-kc-sqc"/>
-                                                    <constraint firstAttribute="height" constant="97" id="Ssn-OW-6q9"/>
-                                                </constraints>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-wi-IKr" userLabel="Exit View">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.56470588239999997" green="0.46274509800000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -756,7 +748,6 @@
                                             <constraint firstItem="uB8-1K-jhd" firstAttribute="top" secondItem="3KP-hN-gHA" secondAttribute="bottom" id="2Md-Jk-EuS"/>
                                             <constraint firstItem="7GJ-1Q-ySS" firstAttribute="centerX" secondItem="q4g-Kn-WLR" secondAttribute="centerX" id="2Ve-5d-lji"/>
                                             <constraint firstItem="cgu-AU-8xv" firstAttribute="top" secondItem="o9l-eT-szJ" secondAttribute="bottom" id="2dE-z4-5Nz"/>
-                                            <constraint firstItem="Kj6-2a-7rr" firstAttribute="leading" secondItem="czR-Ok-YgB" secondAttribute="leading" constant="43" id="2tb-Ub-Fbp"/>
                                             <constraint firstItem="q4g-Kn-WLR" firstAttribute="centerX" secondItem="0Mt-sr-FMa" secondAttribute="centerX" id="5GU-xz-OYJ"/>
                                             <constraint firstItem="7GJ-1Q-ySS" firstAttribute="top" secondItem="7j8-WQ-xrv" secondAttribute="bottom" constant="40" id="6bl-rA-DoG"/>
                                             <constraint firstItem="gzZ-Lb-eVQ" firstAttribute="centerX" secondItem="BRF-xc-Iwi" secondAttribute="centerX" id="6hR-JJ-RtE"/>
@@ -789,7 +780,6 @@
                                             <constraint firstItem="VtH-Q0-Tob" firstAttribute="top" secondItem="y98-vo-gKg" secondAttribute="bottom" id="fdF-FY-syQ"/>
                                             <constraint firstItem="Xz7-qW-Huo" firstAttribute="top" secondItem="H4y-Rx-fQv" secondAttribute="bottom" id="fem-ua-4g3"/>
                                             <constraint firstAttribute="bottom" secondItem="S7K-Ij-rhT" secondAttribute="bottom" constant="102" id="gHg-DA-FSg"/>
-                                            <constraint firstItem="Kj6-2a-7rr" firstAttribute="top" secondItem="czR-Ok-YgB" secondAttribute="top" constant="170" id="gwx-BC-OfO"/>
                                             <constraint firstItem="wIe-d6-wmY" firstAttribute="top" secondItem="Ahs-gx-u2u" secondAttribute="bottom" constant="40" id="hoq-4t-DcK"/>
                                             <constraint firstItem="uB8-1K-jhd" firstAttribute="centerX" secondItem="3KP-hN-gHA" secondAttribute="centerX" id="iWg-WR-4U9"/>
                                             <constraint firstItem="Ios-5m-0IU" firstAttribute="centerX" secondItem="VbL-3o-V0K" secondAttribute="centerX" id="jwM-0F-aQU"/>
@@ -851,7 +841,20 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="catBtn00" destination="VbL-3o-V0K" id="mQ9-Wf-Oi2"/>
+                        <outlet property="catBtn01" destination="3KP-hN-gHA" id="QQZ-Wo-NQg"/>
+                        <outlet property="catBtn02" destination="o9l-eT-szJ" id="TxP-H8-tk9"/>
+                        <outlet property="catBtn10" destination="Ios-5m-0IU" id="yG5-5G-YET"/>
+                        <outlet property="catBtn11" destination="0Mt-sr-FMa" id="YHu-s5-WYm"/>
+                        <outlet property="catBtn12" destination="W59-nw-UqC" id="hzv-PV-KMi"/>
+                        <outlet property="catBtn20" destination="y98-vo-gKg" id="tah-ui-uLH"/>
+                        <outlet property="catBtn21" destination="q4g-Kn-WLR" id="tjD-Ky-OHg"/>
+                        <outlet property="catBtn22" destination="wIe-d6-wmY" id="98u-LA-Z1V"/>
+                        <outlet property="catBtn30" destination="H4y-Rx-fQv" id="2fH-Ug-1LC"/>
+                        <outlet property="catBtn31" destination="7GJ-1Q-ySS" id="SNv-ue-bCS"/>
+                        <outlet property="catBtn32" destination="BRF-xc-Iwi" id="b6a-XP-aRQ"/>
                         <outlet property="categoriesMenuView" destination="czR-Ok-YgB" id="T1K-zb-chX"/>
+                        <outlet property="closeCatBtn" destination="S7K-Ij-rhT" id="SbW-qd-vzO"/>
                         <outlet property="homeButton" destination="fMz-fv-cCh" id="2vy-Cd-CoU"/>
                         <outlet property="homeView" destination="0F4-4f-o1e" id="vzm-bU-8Np"/>
                         <outlet property="inboxButton" destination="6jJ-lw-OZ7" id="F6e-y1-bCq"/>
