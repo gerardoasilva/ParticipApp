@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeButton: UIButton!
     
     // Categories Menu Outlets
-    @IBOutlet weak var categoriesMenuView: UIView!
+    @IBOutlet weak var catMenuView: UIView!
     @IBOutlet weak var catBtn00: UIButton!
     @IBOutlet weak var catBtn01: UIButton!
     @IBOutlet weak var catBtn02: UIButton!
@@ -41,6 +41,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var catBtn31: UIButton!
     @IBOutlet weak var catBtn32: UIButton!
     @IBOutlet weak var closeCatBtn: UIButton!
+    @IBOutlet weak var closeCatMenuView: UIView!
+    
+    // Array to store all the buttons from Category Menu
+    var allButtons: [UIButton] = [UIButton]()
     
     // Variable to know if menu is showing
     var menuIsShowing: Bool = false
@@ -83,6 +87,28 @@ class HomeViewController: UIViewController {
         preferencesButton.layer.cornerRadius = 0.5 * preferencesButton.bounds.size.width
         inboxButton.layer.cornerRadius = 0.5 * inboxButton.bounds.size.width
         homeButton.layer.cornerRadius = cornerR
+        
+    // MARK: - CATEGORY MENU ELEMENTS
+        
+        // Adds every category button to array allButtons and makes it a circle
+        for view in catMenuView.subviews as [UIView] {
+            if let btn = view as? UIButton {
+                if btn.tag == 1 {
+                    allButtons.append(btn)
+                    btn.layer.cornerRadius = 0.5 * btn.bounds.width
+                } else {
+                    allButtons.append(btn)
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    @IBAction func createReport(_ sender: Any) {
+        homeView.isUserInteractionEnabled = false
+        showCategoryMenu()
         
     }
     
@@ -175,6 +201,33 @@ class HomeViewController: UIViewController {
             break
         }
     }
+    
+    // MISSING - create animation to show catMenu
+    func showCategoryMenu() {
+        
+        self.navigationController?.navigationBar.isHidden = true;
+        homeView.isUserInteractionEnabled = false
+        let animDuration: Double = 0.3
+        
+        // Animates catMenuView and its buttons
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
+                self.catMenuView.alpha = 0.9
+            })
+        
+            for button in self.allButtons {
+                button.transform = CGAffineTransform(scaleX: 0, y: 0)
+                UIView.animate(withDuration: animDuration) {
+                    button.alpha = 1
+                    button.transform = .identity
+                }
+            }
+        }
+        
+        
+    }
+    
+    
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
