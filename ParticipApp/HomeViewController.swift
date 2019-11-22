@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var openMenuView: UIView!
     @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var rewardsHeaderView: UIView!
+    @IBOutlet weak var rewardsMenuView: UIView!
     @IBOutlet weak var homeButtonView: UIView!
     
     // Menu outlets
@@ -25,7 +27,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var preferencesButton: UIButton!
     @IBOutlet weak var inboxButton: UIButton!
-    @IBOutlet weak var homeButton: UIButton!
     
     // Categories Menu Outlets
     @IBOutlet weak var catMenuView: UIView!
@@ -85,12 +86,14 @@ class HomeViewController: UIViewController {
         
         //Shadow
         homeView.layer.shadowOpacity = 1
+        homeView.layer.shadowRadius = 0.25
         reportButton.layer.shadowOpacity = 1
         
         // Radius
         homeView.layer.shadowRadius = 5
         homeView.layer.cornerRadius = cornerR
         reportButton.layer.cornerRadius = 0.5 * reportButton.bounds.width
+        rewardsHeaderView.layer.cornerRadius = cornerR
         homeButtonView.layer.cornerRadius = cornerR
         
     // MARK: - MENU ELEMENTS
