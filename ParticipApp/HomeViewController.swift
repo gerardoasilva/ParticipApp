@@ -59,15 +59,18 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Checks location services
+        checkLocationServices()
+        
         // Left edge gesture recognizer
         let leftEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(leftScreenEdgeSwiped))
         leftEdgePan.edges = .left
-        
         // Add gesture recognizer to view
         openMenuView.addGestureRecognizer(leftEdgePan)
         
-        // Checks location services
-        checkLocationServices()
+        // Tap gesture recognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didCloseCatMenu(_:)))
+        closeCatMenuView.addGestureRecognizer(tapGesture)
         
     // MARK: - HOME ELEMENTS
         
@@ -105,11 +108,29 @@ class HomeViewController: UIViewController {
         
     }
     
-    
+    // Opens report category menu
     @IBAction func createReport(_ sender: Any) {
-        homeView.isUserInteractionEnabled = false
         showCategoryMenu()
+    }
+    
+    
+    
+    @IBAction func didCloseCatMenu(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = false;
+        let animDuration: Double = 0.3
         
+        // Animates catMenuView and its buttons
+        DispatchQueue.main.async {
+            for button in self.allButtons {
+                UIView.animate(withDuration: animDuration) {
+                    button.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                    button.alpha = 0
+                }
+            }
+            UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
+                self.catMenuView.alpha = 0
+            })
+        }
     }
     
     // Left edge pan gesture called
@@ -202,11 +223,10 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // MISSING - create animation to show catMenu
+    // Shows report categories
     func showCategoryMenu() {
         
         self.navigationController?.navigationBar.isHidden = true;
-        homeView.isUserInteractionEnabled = false
         let animDuration: Double = 0.3
         
         // Animates catMenuView and its buttons
@@ -216,7 +236,7 @@ class HomeViewController: UIViewController {
             })
         
             for button in self.allButtons {
-                button.transform = CGAffineTransform(scaleX: 0, y: 0)
+                button.transform = button.transform.scaledBy(x: 0.01, y: 0.01)
                 UIView.animate(withDuration: animDuration) {
                     button.alpha = 1
                     button.transform = .identity

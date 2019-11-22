@@ -742,6 +742,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                 <state key="normal" title="CERRAR"/>
+                                                <connections>
+                                                    <action selector="didCloseCatMenu:" destination="Am1-ea-1LQ" eventType="touchUpInside" id="vzk-aa-sFQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.56470588239999997" green="0.46274509800000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -874,6 +877,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FBe-oV-QeP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1118.840579710145" y="989.73214285714278"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aGb-Xl-acI">
+            <objects>
+                <viewController id="uod-vG-uwQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kTT-XG-kuy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="2PH-ns-S2x"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="q4q-hm-bEI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ztK-eM-FdD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1867" y="990"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="cus-a4-msZ">
