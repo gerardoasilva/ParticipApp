@@ -26,7 +26,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var preferencesButton: UIButton!
-    @IBOutlet weak var inboxButton: UIButton!
     
     // Categories Menu Outlets
     @IBOutlet weak var catMenuView: UIView!
@@ -63,6 +62,9 @@ class HomeViewController: UIViewController {
         
         // Checks location services
         checkLocationServices()
+        
+        // Custom back nav bar button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         // Left edge gesture recognizer
         let leftEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(leftScreenEdgeSwiped(_:)))
@@ -101,7 +103,6 @@ class HomeViewController: UIViewController {
         // Radius - menu elements
         mapView.layer.cornerRadius = cornerR
         preferencesButton.layer.cornerRadius = 0.5 * preferencesButton.bounds.size.width
-        inboxButton.layer.cornerRadius = 0.5 * inboxButton.bounds.size.width
         
     // MARK: - CATEGORY MENU ELEMENTS
         
