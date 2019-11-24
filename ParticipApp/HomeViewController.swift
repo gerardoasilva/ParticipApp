@@ -63,6 +63,9 @@ class HomeViewController: UIViewController {
         // Checks location services
         checkLocationServices()
         
+        // Adds listener for side menu closed definitely
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidCloseDefinitely(_:)), name: .didCloseDefinitely, object: nil)
+        
         // Custom back nav bar button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
@@ -83,6 +86,7 @@ class HomeViewController: UIViewController {
         // Tap gesture recognizer for categoryMenu
         let tapGestureCatMenu = UITapGestureRecognizer(target: self, action: #selector(didCloseCatMenu(_:)))
         closeCatMenuView.addGestureRecognizer(tapGestureCatMenu)
+        
         
     // MARK: - HOME ELEMENTS
         
@@ -127,7 +131,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    
+    // Closes categoryMenu
     @IBAction func didCloseCatMenu(_ sender: Any) {
         self.navigationController?.navigationBar.isHidden = false;
         let animDuration: Double = 0.3
@@ -191,6 +195,32 @@ class HomeViewController: UIViewController {
             // Updates var menuIsShowing
             menuIsShowing = !menuIsShowing
         }
+    }
+    
+    // Closes side menu definitely
+    @objc func closeMenuDefinitely(_ sender: Any) {
+        if menuIsShowing {
+            self.navigationController?.navigationBar.isHidden = false;
+            homeButtonView.alpha = 0
+            menuButton.isEnabled = true
+            menuButton.tintColor = UIColor.systemBlue
+            openMenuView.alpha  = 1
+            menuLeadingConstraint.constant = -375
+            
+//            // Menu slide animation
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+            
+            // Updates var menuIsShowing
+            menuIsShowing = !menuIsShowing
+        }
+    }
+// MARK: - LISTENERS
+    
+    // Listener for definitive closeMenu
+    @objc func onDidCloseDefinitely(_ notification: Notification) {
+        closeMenuDefinitely(self)
     }
     
     func setUpLocationManager() {
@@ -275,4 +305,8 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
+}
+
+extension Notification.Name {
+    static let didCloseDefinitely = Notification.Name("didCloseDefinitely")
 }

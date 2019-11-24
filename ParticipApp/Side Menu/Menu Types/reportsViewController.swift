@@ -10,13 +10,38 @@ import UIKit
 
 class reportsViewController: UIViewController {
 
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var todosContainerView: UIView!
+    @IBOutlet weak var resueltosContainerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Shows only default container
+        todosContainerView.alpha = 1
+        resueltosContainerView.alpha = 0
     }
     
-
+    // Displays reposrt depending on segmentedControl
+    @IBAction func indexChanged(_ sender: Any) {
+        if self.segmentedControl.selectedSegmentIndex == 0 {
+            todosContainerView.alpha = 1
+            resueltosContainerView.alpha = 0
+        } else {
+            resueltosContainerView.alpha = 1
+            todosContainerView.alpha = 0
+        }
+    }
+    
+    
+    // Closes all menus and goes to homeView
+    @IBAction func closePressed(_ sender: Any) {
+        // Notifies the homeViewController to close menu definitely
+        NotificationCenter.default.post(name: .didCloseDefinitely, object: nil)
+        // Pops last profileViewController
+        navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
