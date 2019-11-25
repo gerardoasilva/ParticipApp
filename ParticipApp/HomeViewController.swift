@@ -12,11 +12,6 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
-    enum CardState {
-        case expanded
-        case collapsed
-    }
-    
     // Home outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var homeView: UIView!
@@ -40,34 +35,38 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var catBtn20: UIButton!
     @IBOutlet weak var catBtn21: UIButton!
     @IBOutlet weak var catBtn22: UIButton!
-    @IBOutlet weak var catBtn30: UIButton!
-    @IBOutlet weak var catBtn31: UIButton!
-    @IBOutlet weak var catBtn32: UIButton!
     @IBOutlet weak var closeCatBtn: UIButton!
     @IBOutlet weak var closeCatMenuView: UIView!
     
-    // CARD
-    /*
-    // reference variables for the rewards menu
-    var cardViewController: CardViewController!
-    var visualEffectView: UIVisualEffectView!
-    let cardHeight: CGFloat = 730
-    let cardHandleAreaHeight: CGFloat = 82
+    // Subcategories Menu Outlet
+    @IBOutlet weak var subCatMenuView: UIView!
+    @IBOutlet weak var subBtn00: UIButton!
+    @IBOutlet weak var subBtn01: UIButton!
+    @IBOutlet weak var subBtn02: UIButton!
+    @IBOutlet weak var subBtn10: UIButton!
+    @IBOutlet weak var subBtn11: UIButton!
+    @IBOutlet weak var subBtn12: UIButton!
+    @IBOutlet weak var subBtn20: UIButton!
+    @IBOutlet weak var subBtn21: UIButton!
+    @IBOutlet weak var subBtn22: UIButton!
+    @IBOutlet weak var closeSubBtn: UIButton!
+    @IBOutlet weak var closeSubCatMenuView: UIView!
     
-    // Variable to know if rewards cards is showing
-    var cardVisible = false
-    var nextState: CardState {
-        return cardVisible ? .collapsed : .expanded
-    }
     
-    var runningAnimations = [UIViewPropertyAnimator]()
-    var animationProgressWhenInterrupted: CGFloat = 0
-    */
     // Array to store all the buttons from Category Menu
-    var allButtons: [UIButton] = [UIButton]()
+    var allCatButtons: [UIButton] = [UIButton]()
+    
+    // Array to store all the buttons from SubCategory Menu
+    var allSubButtons: [UIButton] = [UIButton]()
     
     // Variable to know if menu is showing
-    var menuIsShowing: Bool = false
+    var sideMenuIsShowing: Bool = false
+    
+    // Variable to keep track of categories menu
+    var catMenuIsShowing: Bool = false
+    
+    // Variable to keep track of subcategories menu
+    var subCatMenuIsShowing: Bool = false
     
     // Constant to store corner radius for elements
     let cornerR: CGFloat = 15
@@ -88,11 +87,6 @@ class HomeViewController: UIViewController {
         // Custom back nav bar button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        /*
-        // Sets up rewards Card
-        setupCard()
-        */
-        
         // Left edge gesture recognizer
         let leftEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(leftScreenEdgeSwiped(_:)))
         leftEdgePan.edges = .left
@@ -110,6 +104,10 @@ class HomeViewController: UIViewController {
         // Tap gesture recognizer for categoryMenu
         let tapGestureCatMenu = UITapGestureRecognizer(target: self, action: #selector(didCloseCatMenu(_:)))
         closeCatMenuView.addGestureRecognizer(tapGestureCatMenu)
+        
+        // Tap gesture recognizer for subcatMenu
+        let tapGestureSubCatMenu = UITapGestureRecognizer(target: self, action: #selector(didCloseSubCatMenu(_:)))
+        closeSubCatMenuView.addGestureRecognizer(tapGestureSubCatMenu)
         
         
     // MARK: - HOME ELEMENTS
@@ -132,14 +130,26 @@ class HomeViewController: UIViewController {
         
     // MARK: - CATEGORY MENU ELEMENTS
         
-        // Adds every category button to array allButtons and makes it a circle
+        // Adds every category button to array allCatButtons and makes it a circle
         for view in catMenuView.subviews as [UIView] {
             if let btn = view as? UIButton {
                 if btn.tag == 1 {
-                    allButtons.append(btn)
+                    allCatButtons.append(btn)
                     btn.layer.cornerRadius = 0.5 * btn.bounds.width
                 } else {
-                    allButtons.append(btn)
+                    allCatButtons.append(btn)
+                }
+            }
+        }
+        
+        // Adds every subcat button to array allSubButtons and makes it a circle
+        for view in subCatMenuView.subviews as [UIView] {
+            if let btn = view as? UIButton {
+                if btn.tag == 1 {
+                    allSubButtons.append(btn)
+                    btn.layer.cornerRadius = 0.5 * btn.bounds.width
+                } else {
+                    allSubButtons.append(btn)
                 }
             }
         }
@@ -147,149 +157,70 @@ class HomeViewController: UIViewController {
         
     }
 
-    /*
-    // Sets up the rewards card menu in homeViewController
-    func setupCard() {
-        // Creates handler of visual effects
-        visualEffectView = UIVisualEffectView()
-        visualEffectView.frame = self.view.frame
-        self.view.addSubview(visualEffectView)
-        
-        // Adds card to homeView
-        cardViewController = CardViewController(nibName:"CardViewController", bundle: nil)
-        // self.addChild(cardViewController)
-        homeView.addSubview(cardViewController.view)
-        
-        // Sets card frame
-        cardViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
-        
-        // Allows the cornerRadius to be applied
-        cardViewController.view.clipsToBounds = true
-        
-        // Define recognizers for card interaction
-        let cardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleCardTap(recognizer:)))
-        let cardPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(HomeViewController.handleCardPan(recognizer:)))
-        
-        // Adds gesture recognizers to the card handleArea
-        cardViewController.handleArea.addGestureRecognizer(cardTapGestureRecognizer)
-        cardViewController.handleArea.addGestureRecognizer(cardPanGestureRecognizer)
-
-    }
     
-    // Handles the rewards' card tap
-    @objc func handleCardTap(recognizer: UITapGestureRecognizer) {
-        switch recognizer.state {
-        case .ended:
-            animateTransitionIfNeeded(state: nextState, duration: 0.3)
-        default:
-            break
-        }
-    }
-    
-    // Handles the redards' card pan
-    @objc func handleCardPan(recognizer: UIPanGestureRecognizer) {
-        switch recognizer.state {
-        case .began:
-            startInteractiveTransition(state: nextState, duration: 0.3)
-        case .changed:
-            let translation = recognizer.translation(in: self.cardViewController.handleArea)
-            var fractionComplete = translation.y / cardHeight
-            fractionComplete = cardVisible ? fractionComplete : -fractionComplete
-            updateInteractiveTransition(fractionCompleted: 0)
-        case .ended:
-            continueInteractiveTransition()
-        default:
-            break
-        }
-    }
-    
-    // Checks if an animation is needed
-    func animateTransitionIfNeeded(state: CardState, duration: TimeInterval) {
-        if runningAnimations.isEmpty {
-            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
-                case .collapsed:
-                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
-                }
-            }
-            
-            frameAnimator.addCompletion { _ in
-                self.cardVisible = !self.cardVisible
-                self.runningAnimations.removeAll()
-            }
-            
-            // Starts animation and adds it to array
-            frameAnimator.startAnimation()
-            runningAnimations.append(frameAnimator)
-            
-            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
-                switch state {
-                case .expanded:
-                    self.cardViewController.view.layer.cornerRadius = 15
-                case .collapsed:
-                    self.cardViewController.view.layer.cornerRadius = 0
-                }
-            }
-            
-            cornerRadiusAnimator.startAnimation()
-            runningAnimations.append(cornerRadiusAnimator)
-            
-            let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.visualEffectView.effect = UIBlurEffect(style: .dark)
-                case .collapsed:
-                    self.visualEffectView.effect = nil
-                }
-            }
-            
-            blurAnimator.startAnimation()
-            runningAnimations.append(blurAnimator)
-        }
-    }
-    
-    // Function that starts the interaction with rewards card
-    func startInteractiveTransition(state: CardState, duration: TimeInterval) {
-        if runningAnimations.isEmpty {
-            // Run animations
-            animateTransitionIfNeeded(state: state, duration: duration)
-        }
-        for animator in runningAnimations {
-            animator.pauseAnimation()
-            animationProgressWhenInterrupted = animator.fractionComplete
-        }
-    }
-    
-    // Updates the fractionComplete of all the animations (when moving finger up or down)
-    func updateInteractiveTransition(fractionCompleted: CGFloat) {
-        for animator in runningAnimations {
-            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
-        }
-    }
-
-    // Uses the remaining time of the animation to finsh
-    func continueInteractiveTransition() {
-        for animator in runningAnimations {
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        }
-    }
- */
     // Opens report category menu
     @IBAction func createReport(_ sender: Any) {
         showCategoryMenu()
     }
     
+    @IBAction func selectedCategory(_ sender: Any) {
+        showSubCatMenu()
+    }
     
-    // Closes categoryMenu
-    @IBAction func didCloseCatMenu(_ sender: Any) {
-        self.navigationController?.navigationBar.isHidden = false;
+    
+    // Shows report categories
+    func showCategoryMenu() {
+        
+        self.navigationController?.navigationBar.isHidden = true;
         let animDuration: Double = 0.3
         
         // Animates catMenuView and its buttons
         DispatchQueue.main.async {
-            for button in self.allButtons {
+            UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
+                self.catMenuView.alpha = 0.9
+            })
+            
+            for button in self.allCatButtons {
+                button.transform = button.transform.scaledBy(x: 0.01, y: 0.01)
+                UIView.animate(withDuration: animDuration) {
+                    button.alpha = 1
+                    button.transform = .identity
+                }
+            }
+        }
+    }
+    
+    // Shows report subcategories
+    func showSubCatMenu() {
+        
+        self.navigationController?.navigationBar.isHidden = true;
+        let animDuration: Double = 0.3
+        
+        // Animates catMenuView and its buttons
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
+                self.catMenuView.alpha = 0
+                self.subCatMenuView.alpha = 0.9
+            })
+            
+            for button in self.allSubButtons {
+                button.transform = button.transform.scaledBy(x: 0.01, y: 0.01)
+                UIView.animate(withDuration: animDuration) {
+                    button.alpha = 1
+                    button.transform = .identity
+                }
+            }
+        }
+    }
+    
+    // Closes categoryMenu
+    @IBAction func didCloseCatMenu(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = false
+        let animDuration: Double = 0.3
+        
+        // Animates catMenuView and its buttons
+        DispatchQueue.main.async {
+            for button in self.allCatButtons {
                 UIView.animate(withDuration: animDuration) {
                     button.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
                     button.alpha = 0
@@ -297,6 +228,24 @@ class HomeViewController: UIViewController {
             }
             UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
                 self.catMenuView.alpha = 0
+            })
+        }
+    }
+    
+    @IBAction func didCloseSubCatMenu(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = false
+        let animDuration: Double = 0.3
+        
+        // Animates catMenuView and its buttons
+        DispatchQueue.main.async {
+            for button in self.allSubButtons {
+                UIView.animate(withDuration: animDuration) {
+                    button.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                    button.alpha = 0
+                }
+            }
+            UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
+                self.subCatMenuView.alpha = 0
             })
         }
     }
@@ -310,7 +259,7 @@ class HomeViewController: UIViewController {
     
     // Opens side menu
     @IBAction func openMenu(_ sender: Any) {
-        if !menuIsShowing {
+        if !sideMenuIsShowing {
             self.navigationController?.navigationBar.isHidden = true;
             menuButton.isEnabled = false
             menuButton.tintColor = UIColor.clear
@@ -324,13 +273,13 @@ class HomeViewController: UIViewController {
             })
             
             // Updates var menuIsShowing
-            menuIsShowing = !menuIsShowing
+            sideMenuIsShowing = !sideMenuIsShowing
         }
     }
     
     // Closes side menu
     @objc func closeMenu(_ sender: Any) {
-        if menuIsShowing {
+        if sideMenuIsShowing {
             self.navigationController?.navigationBar.isHidden = false;
             homeButtonView.alpha = 0
             menuButton.isEnabled = true
@@ -344,13 +293,13 @@ class HomeViewController: UIViewController {
             })
             
             // Updates var menuIsShowing
-            menuIsShowing = !menuIsShowing
+            sideMenuIsShowing = !sideMenuIsShowing
         }
     }
     
     // Closes side menu definitely
     @objc func closeMenuDefinitely(_ sender: Any) {
-        if menuIsShowing {
+        if sideMenuIsShowing {
             self.navigationController?.navigationBar.isHidden = false;
             homeButtonView.alpha = 0
             menuButton.isEnabled = true
@@ -364,9 +313,10 @@ class HomeViewController: UIViewController {
 //            })
             
             // Updates var menuIsShowing
-            menuIsShowing = !menuIsShowing
+            sideMenuIsShowing = !sideMenuIsShowing
         }
     }
+    
 // MARK: - LISTENERS
     
     // Listener for definitive closeMenu
@@ -416,32 +366,6 @@ class HomeViewController: UIViewController {
             break
         }
     }
-    
-    // Shows report categories
-    func showCategoryMenu() {
-        
-        self.navigationController?.navigationBar.isHidden = true;
-        let animDuration: Double = 0.3
-        
-        // Animates catMenuView and its buttons
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: animDuration, delay: 0, options: [.curveEaseInOut], animations: {
-                self.catMenuView.alpha = 0.9
-            })
-        
-            for button in self.allButtons {
-                button.transform = button.transform.scaledBy(x: 0.01, y: 0.01)
-                UIView.animate(withDuration: animDuration) {
-                    button.alpha = 1
-                    button.transform = .identity
-                }
-            }
-        }
-        
-        
-    }
-    
-    
 }
 
 extension HomeViewController: CLLocationManagerDelegate {

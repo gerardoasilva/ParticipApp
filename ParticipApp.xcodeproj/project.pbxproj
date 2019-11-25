@@ -19,8 +19,7 @@
 		DC2B0481238A445F00EEF20F /* leaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2B0480238A445F00EEF20F /* leaderBoardViewController.swift */; };
 		DC2B0483238A446800EEF20F /* initiativesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2B0482238A446800EEF20F /* initiativesViewController.swift */; };
 		DC2B0485238A447100EEF20F /* settingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2B0484238A447100EEF20F /* settingsViewController.swift */; };
-		DC385ED3238B873D004F9AC4 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC385ED1238B873D004F9AC4 /* CardViewController.swift */; };
-		DC385ED4238B873D004F9AC4 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC385ED2238B873D004F9AC4 /* CardViewController.xib */; };
+		DC385EDE238C0FB6004F9AC4 /* reportFormatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC385EDD238C0FB6004F9AC4 /* reportFormatViewController.swift */; };
 		DCC70310237B6E8800BE473B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7030F237B6E8800BE473B /* AppDelegate.swift */; };
 		DCC70312237B6E8800BE473B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC70311237B6E8800BE473B /* SceneDelegate.swift */; };
 		DCC70319237B6E8800BE473B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCC70318237B6E8800BE473B /* Assets.xcassets */; };
@@ -42,8 +41,7 @@
 		DC2B0480238A445F00EEF20F /* leaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaderBoardViewController.swift; sourceTree = "<group>"; };
 		DC2B0482238A446800EEF20F /* initiativesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = initiativesViewController.swift; sourceTree = "<group>"; };
 		DC2B0484238A447100EEF20F /* settingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsViewController.swift; sourceTree = "<group>"; };
-		DC385ED1238B873D004F9AC4 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
-		DC385ED2238B873D004F9AC4 /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
+		DC385EDD238C0FB6004F9AC4 /* reportFormatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reportFormatViewController.swift; sourceTree = "<group>"; };
 		DCC7030C237B6E8800BE473B /* ParticipApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParticipApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC7030F237B6E8800BE473B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCC70311237B6E8800BE473B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,13 +112,12 @@
 				DC0D46D52386783100AB732E /* SignupViewController.swift */,
 				DC1707B1238258A100542077 /* CustomNavController.swift */,
 				DCC70327237B972500BE473B /* HomeViewController.swift */,
+				DC385EDD238C0FB6004F9AC4 /* reportFormatViewController.swift */,
 				DC2B0488238A45EB00EEF20F /* Side Menu */,
 				DCC70323237B70E000BE473B /* Main.storyboard */,
 				DCC70318237B6E8800BE473B /* Assets.xcassets */,
 				DCC7031A237B6E8800BE473B /* LaunchScreen.storyboard */,
 				DCC7031D237B6E8800BE473B /* Info.plist */,
-				DC385ED1238B873D004F9AC4 /* CardViewController.swift */,
-				DC385ED2238B873D004F9AC4 /* CardViewController.xib */,
 			);
 			path = ParticipApp;
 			sourceTree = "<group>";
@@ -183,7 +180,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC385ED4238B873D004F9AC4 /* CardViewController.xib in Resources */,
 				DCC7031C237B6E8800BE473B /* LaunchScreen.storyboard in Resources */,
 				DCC70319237B6E8800BE473B /* Assets.xcassets in Resources */,
 				DCC70324237B70E000BE473B /* Main.storyboard in Resources */,
@@ -209,9 +205,9 @@
 				DCC70310237B6E8800BE473B /* AppDelegate.swift in Sources */,
 				DC2B047D238A444900EEF20F /* reportsViewController.swift in Sources */,
 				DCC70312237B6E8800BE473B /* SceneDelegate.swift in Sources */,
-				DC385ED3238B873D004F9AC4 /* CardViewController.swift in Sources */,
 				DC0D46D2238667E300AB732E /* LoginViewController.swift in Sources */,
 				DCC70328237B972500BE473B /* HomeViewController.swift in Sources */,
+				DC385EDE238C0FB6004F9AC4 /* reportFormatViewController.swift in Sources */,
 				DC2B0473238A213000EEF20F /* sideMenuTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
