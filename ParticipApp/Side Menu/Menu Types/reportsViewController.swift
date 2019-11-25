@@ -18,18 +18,18 @@ class reportsViewController: UIViewController {
         super.viewDidLoad()
         
         // Shows only default container
-        todosContainerView.alpha = 1
-        resueltosContainerView.alpha = 0
+        todosContainerView.isHidden = false
+        resueltosContainerView.isHidden = true
     }
     
     // Displays reposrt depending on segmentedControl
     @IBAction func indexChanged(_ sender: Any) {
         if self.segmentedControl.selectedSegmentIndex == 0 {
-            todosContainerView.alpha = 1
-            resueltosContainerView.alpha = 0
+            todosContainerView.isHidden = false
+            resueltosContainerView.isHidden = true
         } else {
-            resueltosContainerView.alpha = 1
-            todosContainerView.alpha = 0
+            resueltosContainerView.isHidden = false
+            todosContainerView.isHidden = true
         }
     }
     
