@@ -12,20 +12,22 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    enum CardState {
+        case expanded
+        case collapsed
+    }
+    
     // Home outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var openMenuView: UIView!
     @IBOutlet weak var reportButton: UIButton!
-    @IBOutlet weak var rewardsHeaderView: UIView!
-    @IBOutlet weak var rewardsMenuView: UIView!
     @IBOutlet weak var homeButtonView: UIView!
     
     // Menu outlets
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    @IBOutlet weak var preferencesButton: UIButton!
     
     // Categories Menu Outlets
     @IBOutlet weak var catMenuView: UIView!
@@ -44,6 +46,23 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var closeCatBtn: UIButton!
     @IBOutlet weak var closeCatMenuView: UIView!
     
+    // CARD
+    /*
+    // reference variables for the rewards menu
+    var cardViewController: CardViewController!
+    var visualEffectView: UIVisualEffectView!
+    let cardHeight: CGFloat = 730
+    let cardHandleAreaHeight: CGFloat = 82
+    
+    // Variable to know if rewards cards is showing
+    var cardVisible = false
+    var nextState: CardState {
+        return cardVisible ? .collapsed : .expanded
+    }
+    
+    var runningAnimations = [UIViewPropertyAnimator]()
+    var animationProgressWhenInterrupted: CGFloat = 0
+    */
     // Array to store all the buttons from Category Menu
     var allButtons: [UIButton] = [UIButton]()
     
@@ -68,6 +87,11 @@ class HomeViewController: UIViewController {
         
         // Custom back nav bar button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        /*
+        // Sets up rewards Card
+        setupCard()
+        */
         
         // Left edge gesture recognizer
         let leftEdgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(leftScreenEdgeSwiped(_:)))
@@ -99,14 +123,12 @@ class HomeViewController: UIViewController {
         homeView.layer.shadowRadius = 5
         homeView.layer.cornerRadius = cornerR
         reportButton.layer.cornerRadius = 0.5 * reportButton.bounds.width
-        rewardsHeaderView.layer.cornerRadius = cornerR
         homeButtonView.layer.cornerRadius = cornerR
         
     // MARK: - MENU ELEMENTS
         
         // Radius - menu elements
         mapView.layer.cornerRadius = cornerR
-        preferencesButton.layer.cornerRadius = 0.5 * preferencesButton.bounds.size.width
         
     // MARK: - CATEGORY MENU ELEMENTS
         
@@ -124,7 +146,136 @@ class HomeViewController: UIViewController {
         
         
     }
+
+    /*
+    // Sets up the rewards card menu in homeViewController
+    func setupCard() {
+        // Creates handler of visual effects
+        visualEffectView = UIVisualEffectView()
+        visualEffectView.frame = self.view.frame
+        self.view.addSubview(visualEffectView)
+        
+        // Adds card to homeView
+        cardViewController = CardViewController(nibName:"CardViewController", bundle: nil)
+        // self.addChild(cardViewController)
+        homeView.addSubview(cardViewController.view)
+        
+        // Sets card frame
+        cardViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
+        
+        // Allows the cornerRadius to be applied
+        cardViewController.view.clipsToBounds = true
+        
+        // Define recognizers for card interaction
+        let cardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleCardTap(recognizer:)))
+        let cardPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(HomeViewController.handleCardPan(recognizer:)))
+        
+        // Adds gesture recognizers to the card handleArea
+        cardViewController.handleArea.addGestureRecognizer(cardTapGestureRecognizer)
+        cardViewController.handleArea.addGestureRecognizer(cardPanGestureRecognizer)
+
+    }
     
+    // Handles the rewards' card tap
+    @objc func handleCardTap(recognizer: UITapGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            animateTransitionIfNeeded(state: nextState, duration: 0.3)
+        default:
+            break
+        }
+    }
+    
+    // Handles the redards' card pan
+    @objc func handleCardPan(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: nextState, duration: 0.3)
+        case .changed:
+            let translation = recognizer.translation(in: self.cardViewController.handleArea)
+            var fractionComplete = translation.y / cardHeight
+            fractionComplete = cardVisible ? fractionComplete : -fractionComplete
+            updateInteractiveTransition(fractionCompleted: 0)
+        case .ended:
+            continueInteractiveTransition()
+        default:
+            break
+        }
+    }
+    
+    // Checks if an animation is needed
+    func animateTransitionIfNeeded(state: CardState, duration: TimeInterval) {
+        if runningAnimations.isEmpty {
+            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+                switch state {
+                case .expanded:
+                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
+                case .collapsed:
+                    self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
+                }
+            }
+            
+            frameAnimator.addCompletion { _ in
+                self.cardVisible = !self.cardVisible
+                self.runningAnimations.removeAll()
+            }
+            
+            // Starts animation and adds it to array
+            frameAnimator.startAnimation()
+            runningAnimations.append(frameAnimator)
+            
+            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
+                switch state {
+                case .expanded:
+                    self.cardViewController.view.layer.cornerRadius = 15
+                case .collapsed:
+                    self.cardViewController.view.layer.cornerRadius = 0
+                }
+            }
+            
+            cornerRadiusAnimator.startAnimation()
+            runningAnimations.append(cornerRadiusAnimator)
+            
+            let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+                switch state {
+                case .expanded:
+                    self.visualEffectView.effect = UIBlurEffect(style: .dark)
+                case .collapsed:
+                    self.visualEffectView.effect = nil
+                }
+            }
+            
+            blurAnimator.startAnimation()
+            runningAnimations.append(blurAnimator)
+        }
+    }
+    
+    // Function that starts the interaction with rewards card
+    func startInteractiveTransition(state: CardState, duration: TimeInterval) {
+        if runningAnimations.isEmpty {
+            // Run animations
+            animateTransitionIfNeeded(state: state, duration: duration)
+        }
+        for animator in runningAnimations {
+            animator.pauseAnimation()
+            animationProgressWhenInterrupted = animator.fractionComplete
+        }
+    }
+    
+    // Updates the fractionComplete of all the animations (when moving finger up or down)
+    func updateInteractiveTransition(fractionCompleted: CGFloat) {
+        for animator in runningAnimations {
+            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
+        }
+    }
+
+    // Uses the remaining time of the animation to finsh
+    func continueInteractiveTransition() {
+        for animator in runningAnimations {
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
+    }
+ */
     // Opens report category menu
     @IBAction func createReport(_ sender: Any) {
         showCategoryMenu()
