@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var levelButton: UIButton!
     
     // Categories Menu Outlets
     @IBOutlet weak var catMenuView: UIView!
@@ -127,6 +128,7 @@ class HomeViewController: UIViewController {
         
         // Radius - menu elements
         mapView.layer.cornerRadius = cornerR
+        levelButton.layer.cornerRadius = 0.5 * levelButton.bounds.width
         
     // MARK: - CATEGORY MENU ELEMENTS
         
