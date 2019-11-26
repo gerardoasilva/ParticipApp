@@ -12,12 +12,14 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var report1: UIButton!
+    @IBOutlet weak var report2: UIButton!
+    
     // Home outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var openMenuView: UIView!
     @IBOutlet weak var reportButton: UIButton!
-    @IBOutlet weak var homeButtonView: UIView!
     
     // Menu outlets
     @IBOutlet weak var menuLeadingConstraint: NSLayoutConstraint!
@@ -26,12 +28,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var levelButton: UIButton!
     @IBOutlet weak var menuTransparentView: UIView!
     
-    // Rewards Menu Outlets
-    @IBOutlet weak var rewardsHeader: UIView!
-    @IBOutlet weak var rewardsHandlerLine: UIView!
-    @IBOutlet weak var rewardsMenu: UIView!
-    @IBOutlet weak var headerBottom: NSLayoutConstraint!
-    @IBOutlet weak var rewardsTransparentView: UIView!
+    // Detailed Report Menu
+    @IBOutlet weak var detailedReport: UIView!
+    @IBOutlet weak var detailedReportHeader: UIView!
+    @IBOutlet weak var detailedReportBottom: NSLayoutConstraint!
+    
     
     
     // Categories Menu Outlets
@@ -78,8 +79,8 @@ class HomeViewController: UIViewController {
     // Variable to keep track of subcategories menu
     var subCatMenuIsShowing: Bool = false
     
-    // Variable to keep track of rewards Menu
-    var rewardsMenuIsShowing: Bool = false
+    // Variable to keep track of detailedReport Menu
+    var detailedReportIsShowing: Bool = false
     
     // Constant to store corner radius for elements
     let cornerR: CGFloat = 15
@@ -87,8 +88,6 @@ class HomeViewController: UIViewController {
     // MAPKIT
     fileprivate let locationManager: CLLocationManager = CLLocationManager()
     let regionInMeters: Double = 500
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,15 +106,6 @@ class HomeViewController: UIViewController {
         leftEdgePan.edges = .left
         openMenuView.addGestureRecognizer(leftEdgePan)
         
-//        // Tap gesture recognizer for homeButtonView
-//        let tapGestureSideMenu = UITapGestureRecognizer(target: self, action: #selector(closeMenu(_:)))
-//        homeButtonView.addGestureRecognizer(tapGestureSideMenu)
-        
-//        // Right edge pan gesture recognizer for side menu
-//        let rightEdgePanSideMenu = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(closeMenu(_:)))
-//        rightEdgePanSideMenu.edges = .right
-//        homeView.addGestureRecognizer(rightEdgePanSideMenu)
-        
         // Tap gesture recognizer for menuTransparentView
         let tapGestureMenuTransparentView = UITapGestureRecognizer(target: self, action: #selector(closeMenu(_:)))
         menuTransparentView.addGestureRecognizer(tapGestureMenuTransparentView)
@@ -133,13 +123,18 @@ class HomeViewController: UIViewController {
         let tapGestureSubCatMenu = UITapGestureRecognizer(target: self, action: #selector(didCloseSubCatMenu(_:)))
         closeSubCatMenuView.addGestureRecognizer(tapGestureSubCatMenu)
         
-        // Tap gesture recognzer for rewards menu header
-        let tapGestureRewardsHeader = UITapGestureRecognizer(target: self, action: #selector(didTouchHeader(_:)))
-        rewardsHeader.addGestureRecognizer(tapGestureRewardsHeader)
+        // Tap gesture recognzer for detailed report header
+        let tapGestureDetailedReportHeader = UITapGestureRecognizer(target: self, action: #selector(closeDetailedReport(_:)))
+        detailedReportHeader.addGestureRecognizer(tapGestureDetailedReportHeader)
+        
+        // Pan gesture recognizer for detailed report header
+        let swipeGestureDetailedReportHeader = UISwipeGestureRecognizer(target: self, action: #selector(closeDetailedReport(_:)))
+        swipeGestureDetailedReportHeader.direction = UISwipeGestureRecognizer.Direction.down
+        detailedReportHeader.addGestureRecognizer(swipeGestureDetailedReportHeader)
     
-        // Tap gesture recognizer for transparent view
-        let tapGestureTransparentView = UITapGestureRecognizer(target: self, action: #selector(didTouchHeader(_:)))
-        rewardsTransparentView.addGestureRecognizer(tapGestureTransparentView)
+        // Reports
+        report1.layer.cornerRadius = report1.bounds.width * 0.5
+        report2.layer.cornerRadius = report2.bounds.width * 0.5
         
     // MARK: - HOME ELEMENTS
         
@@ -152,15 +147,15 @@ class HomeViewController: UIViewController {
         homeView.layer.shadowRadius = 5
         homeView.layer.cornerRadius = cornerR
         reportButton.layer.cornerRadius = 0.5 * reportButton.bounds.width
-//        homeButtonView.layer.cornerRadius = cornerR
         
-    // MARK: - REWARDS MENU ELEMENTS
+    // MARK: - DETAILED REPORT MENU ELEMENTS
         
         // Radius
-        rewardsHeader.layer.cornerRadius = cornerR
-        rewardsHeader.layer.shadowOpacity = 0
-        rewardsHeader.layer.shadowRadius = 3
-        rewardsMenu.alpha = 0
+        detailedReport.layer.cornerRadius = cornerR
+        detailedReportHeader.layer.cornerRadius = cornerR
+        detailedReportHeader.layer.shadowOpacity = 0
+        detailedReportHeader.layer.shadowRadius = 3
+        detailedReportHeader.layer.shadowOffset = CGSize(width: 0, height: -5)
         
         
         
@@ -198,35 +193,44 @@ class HomeViewController: UIViewController {
         }
         
         
+    }//Ends ViewDid Load
+    
+    @IBAction func didPressReport(_ sender: Any) {
+        openDetailedReport(self)
     }
     
-    // When rewards menu header is touched
-    @objc func didTouchHeader(_ sender: Any) {
-        if !rewardsMenuIsShowing {
-            self.navigationController?.navigationBar.isHidden = true
-            homeView.isUserInteractionEnabled = false
-            rewardsMenu.alpha = 1
+    
+    // Closes detailed report menu
+    @objc func closeDetailedReport(_ sender: Any) {
+        if detailedReportIsShowing {
+            menuTransparentView.isHidden = false
+            catMenuView.isHidden = false
+            subCatMenuView.isHidden = false
             UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                self.rewardsTransparentView.alpha = 0.5
-                self.headerBottom.constant = 726
-                self.rewardsHeader.layer.shadowOpacity = 0.5
+                self.detailedReportBottom.constant = -550
+                self.detailedReportHeader.layer.shadowOpacity = 0
                 self.view.layoutIfNeeded()
-            })
-        } else {
-            self.navigationController?.navigationBar.isHidden = false
-            homeView.isUserInteractionEnabled = true
-            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                self.rewardsTransparentView.alpha = 0
-                self.headerBottom.constant = 0
-                self.rewardsHeader.layer.shadowOpacity = 0
-                self.view.layoutIfNeeded()
-            }, completion: { (success) in
-                self.rewardsMenu.alpha = 0
             })
 
         }
-        self.rewardsMenuIsShowing = !self.rewardsMenuIsShowing
-        
+        detailedReportIsShowing = !detailedReportIsShowing
+    }
+    
+    // Opens detailed report menu
+    @objc func openDetailedReport(_ sender: Any) {
+        if detailedReportIsShowing {
+            closeDetailedReport(self)
+        }
+        if !detailedReportIsShowing {
+            catMenuView.isHidden = true
+            subCatMenuView.isHidden = true
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                self.detailedReportBottom.constant = 0
+                self.detailedReportHeader.layer.shadowOpacity = 0.5
+                self.view.layoutIfNeeded()
+            })
+        }
+        self.detailedReportIsShowing = !self.detailedReportIsShowing
     }
     
     // Opens report category menu
@@ -238,11 +242,12 @@ class HomeViewController: UIViewController {
         showSubCatMenu()
     }
     
-    
     // Shows report categories
     func showCategoryMenu() {
         
-        self.navigationController?.navigationBar.isHidden = true;
+        navigationController?.navigationBar.isHidden = true;
+        homeView.isUserInteractionEnabled = false
+        //menuTransparentView.isHidden = true
         let animDuration: Double = 0.3
         
         // Animates catMenuView and its buttons
@@ -264,7 +269,7 @@ class HomeViewController: UIViewController {
     // Shows report subcategories
     func showSubCatMenu() {
         
-        self.navigationController?.navigationBar.isHidden = true;
+        navigationController?.navigationBar.isHidden = true;
         let animDuration: Double = 0.3
         
         // Animates catMenuView and its buttons
@@ -286,7 +291,9 @@ class HomeViewController: UIViewController {
     
     // Closes categoryMenu
     @IBAction func didCloseCatMenu(_ sender: Any) {
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
+        homeView.isUserInteractionEnabled = true
+        //menuTransparentView.isHidden = false
         let animDuration: Double = 0.3
         
         // Animates catMenuView and its buttons
@@ -304,7 +311,9 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func didCloseSubCatMenu(_ sender: Any) {
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
+        homeView.isUserInteractionEnabled = true
+        //menuTransparentView.isHidden = false
         let animDuration: Double = 0.3
         
         // Animates catMenuView and its buttons
@@ -332,13 +341,7 @@ class HomeViewController: UIViewController {
     @IBAction func openMenu(_ sender: Any) {
         if !sideMenuIsShowing {
             navigationController?.navigationBar.isHidden = true;
-            rewardsMenu.isUserInteractionEnabled = false
-            //homeButtonView.alpha = 0.5
-            //openMenuView.alpha = 0
-            //menuButton.isEnabled = false
-            //menuButton.tintColor = UIColor.clear
-            
-
+            //detailedReportHeader.isUserInteractionEnabled = false
             // Menu slide animation
             UIView.animate(withDuration: 0.3, animations: {
                 self.menuTransparentView.alpha = 0.5
@@ -355,12 +358,6 @@ class HomeViewController: UIViewController {
     @objc func closeMenu(_ sender: Any) {
         if sideMenuIsShowing {
             navigationController?.navigationBar.isHidden = false;
-            rewardsMenu.isUserInteractionEnabled = true
-            //homeButtonView.alpha = 0
-            //openMenuView.alpha  = 1
-            //menuButton.isEnabled = true
-            //menuButton.tintColor = UIColor.systemBlue
-            
             
             // Menu slide animation
             UIView.animate(withDuration: 0.3, animations: {
