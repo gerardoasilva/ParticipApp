@@ -709,7 +709,7 @@
                                             <constraint firstAttribute="width" constant="80" id="UvU-ND-vjO"/>
                                             <constraint firstAttribute="height" constant="80" id="nIV-uf-mnn"/>
                                         </constraints>
-                                        <state key="normal" image="house" catalog="system">
+                                        <state key="normal" image="tornado" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -722,14 +722,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNh-iI-sY3" userLabel="Nature">
+                                    <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNh-iI-sY3" userLabel="Nature">
                                         <rect key="frame" x="291" y="170" width="80" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="CDx-AU-QwI"/>
                                             <constraint firstAttribute="width" constant="80" id="hps-uz-Vf6"/>
                                         </constraints>
-                                        <state key="normal" image="cloud.snow.fill" catalog="system">
+                                        <state key="normal" image="hammer" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -749,7 +749,7 @@
                                             <constraint firstAttribute="height" constant="80" id="Owb-jI-j5X"/>
                                             <constraint firstAttribute="width" constant="80" id="yXh-ho-vMR"/>
                                         </constraints>
-                                        <state key="normal" image="burn" catalog="system">
+                                        <state key="normal" image="exclamationmark.octagon" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -769,7 +769,7 @@
                                             <constraint firstAttribute="height" constant="80" id="Wbu-sg-1zO"/>
                                             <constraint firstAttribute="width" constant="80" id="rvP-QR-xch"/>
                                         </constraints>
-                                        <state key="normal" image="lightbulb" catalog="system">
+                                        <state key="normal" image="lock.shield" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -789,7 +789,7 @@
                                             <constraint firstAttribute="height" constant="80" id="XCi-te-Dlh"/>
                                             <constraint firstAttribute="width" constant="80" id="iQf-3A-9dG"/>
                                         </constraints>
-                                        <state key="normal" image="map" catalog="system">
+                                        <state key="normal" image="burn" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -809,7 +809,7 @@
                                             <constraint firstAttribute="height" constant="80" id="l3n-xU-Xy7"/>
                                             <constraint firstAttribute="width" constant="80" id="tpk-h2-Ijp"/>
                                         </constraints>
-                                        <state key="normal" image="flame" catalog="system">
+                                        <state key="normal" image="45.square.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -829,7 +829,7 @@
                                             <constraint firstAttribute="width" constant="80" id="LNF-ff-h3n"/>
                                             <constraint firstAttribute="height" constant="80" id="PwO-p4-muN"/>
                                         </constraints>
-                                        <state key="normal" image="tram.fill" catalog="system">
+                                        <state key="normal" image="ellipses.bubble" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -849,7 +849,7 @@
                                             <constraint firstAttribute="width" constant="80" id="XDJ-Ab-2Rh"/>
                                             <constraint firstAttribute="height" constant="80" id="jkk-8H-iAK"/>
                                         </constraints>
-                                        <state key="normal" image="studentdesk" catalog="system">
+                                        <state key="normal" image="ellipsis" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -958,7 +958,7 @@
                                             <constraint firstAttribute="width" constant="80" id="GhY-sq-HgR"/>
                                             <constraint firstAttribute="height" constant="80" id="oqA-xs-u1c"/>
                                         </constraints>
-                                        <state key="normal" image="house" catalog="system">
+                                        <state key="normal" image="bolt.horizontal.circle" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -978,7 +978,7 @@
                                             <constraint firstAttribute="width" constant="80" id="acs-Je-iRo"/>
                                             <constraint firstAttribute="height" constant="80" id="bf2-cH-FFg"/>
                                         </constraints>
-                                        <state key="normal" image="cloud.snow.fill" catalog="system">
+                                        <state key="normal" image="lightbulb" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -998,7 +998,7 @@
                                             <constraint firstAttribute="width" constant="80" id="2CM-bT-3hC"/>
                                             <constraint firstAttribute="height" constant="80" id="euJ-hs-wXO"/>
                                         </constraints>
-                                        <state key="normal" image="burn" catalog="system">
+                                        <state key="normal" image="nosign" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -1018,7 +1018,7 @@
                                             <constraint firstAttribute="width" constant="80" id="8rA-jh-NDx"/>
                                             <constraint firstAttribute="height" constant="80" id="PjO-Z1-62e"/>
                                         </constraints>
-                                        <state key="normal" image="lightbulb" catalog="system">
+                                        <state key="normal" image="wrench" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -1038,7 +1038,7 @@
                                             <constraint firstAttribute="height" constant="80" id="McK-SN-X4l"/>
                                             <constraint firstAttribute="width" constant="80" id="zcH-C3-GVf"/>
                                         </constraints>
-                                        <state key="normal" image="map" catalog="system">
+                                        <state key="normal" image="hand.raised" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -1058,7 +1058,7 @@
                                             <constraint firstAttribute="height" constant="80" id="KfR-AV-DpE"/>
                                             <constraint firstAttribute="width" constant="80" id="cfN-iT-Wpa"/>
                                         </constraints>
-                                        <state key="normal" image="flame" catalog="system">
+                                        <state key="normal" image="questionmark.diamond" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -1078,7 +1078,7 @@
                                             <constraint firstAttribute="width" constant="80" id="2r4-jm-M7q"/>
                                             <constraint firstAttribute="height" constant="80" id="sgP-nB-PbP"/>
                                         </constraints>
-                                        <state key="normal" image="tram.fill" catalog="system">
+                                        <state key="normal" image="burn" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -1098,7 +1098,7 @@
                                             <constraint firstAttribute="width" constant="80" id="a8s-3S-nbS"/>
                                             <constraint firstAttribute="height" constant="80" id="aD7-Pm-e4v"/>
                                         </constraints>
-                                        <state key="normal" image="studentdesk" catalog="system">
+                                        <state key="normal" image="ellipsis" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
                                         </state>
                                         <connections>
@@ -6317,12 +6317,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="45.square.fill" catalog="system" width="64" height="56"/>
         <image name="Recurso3" width="512" height="512"/>
         <image name="Recurso4" width="512" height="512"/>
         <image name="Recurso5" width="512" height="512"/>
         <image name="Recurso6" width="512" height="512"/>
         <image name="app.gift.fill" catalog="system" width="64" height="56"/>
         <image name="bell.fill" catalog="system" width="64" height="62"/>
+        <image name="bolt.horizontal.circle" catalog="system" width="64" height="60"/>
         <image name="bubble.left.and.bubble.right.fill" catalog="system" width="64" height="48"/>
         <image name="burn" catalog="system" width="64" height="60"/>
         <image name="camera" catalog="system" width="64" height="48"/>
@@ -6332,35 +6334,39 @@
         <image name="chevron.right" catalog="system" width="48" height="64"/>
         <image name="circle" catalog="system" width="64" height="60"/>
         <image name="circle.fill" catalog="system" width="64" height="60"/>
-        <image name="cloud.snow.fill" catalog="system" width="64" height="64"/>
         <image name="crash" width="958" height="596"/>
+        <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="envelope" catalog="system" width="64" height="46"/>
-        <image name="flame" catalog="system" width="54" height="64"/>
+        <image name="exclamationmark.octagon" catalog="system" width="64" height="56"/>
         <image name="gear" catalog="system" width="64" height="58"/>
+        <image name="hammer" catalog="system" width="64" height="56"/>
+        <image name="hand.raised" catalog="system" width="64" height="64"/>
         <image name="hand.thumbsup.fill" catalog="system" width="64" height="62"/>
-        <image name="house" catalog="system" width="64" height="54"/>
         <image name="info.circle.fill" catalog="system" width="64" height="60"/>
         <image name="lightbulb" catalog="system" width="56" height="64"/>
         <image name="line.horizontal.3" catalog="system" width="64" height="32"/>
         <image name="list.number" catalog="system" width="64" height="48"/>
         <image name="lock.fill" catalog="system" width="64" height="64"/>
+        <image name="lock.shield" catalog="system" width="64" height="60"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="map" catalog="system" width="64" height="56"/>
         <image name="map.fill" catalog="system" width="64" height="56"/>
         <image name="mappin" catalog="system" width="52" height="64"/>
         <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
         <image name="marcelaAvatar" width="4377" height="4377"/>
         <image name="multiply.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="nosign" catalog="system" width="64" height="60"/>
         <image name="person.2.fill" catalog="system" width="64" height="40"/>
         <image name="person.3.fill" catalog="system" width="71" height="34"/>
         <image name="person.circle" catalog="system" width="64" height="60"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
         <image name="photo.fill" catalog="system" width="64" height="46"/>
+        <image name="questionmark.diamond" catalog="system" width="64" height="60"/>
         <image name="speaker.2.fill" catalog="system" width="64" height="48"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>
-        <image name="studentdesk" catalog="system" width="62" height="64"/>
-        <image name="tram.fill" catalog="system" width="48" height="64"/>
+        <image name="tornado" catalog="system" width="58" height="64"/>
         <image name="tray.full.fill" catalog="system" width="64" height="44"/>
+        <image name="wrench" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ydf-De-GXE"/>
