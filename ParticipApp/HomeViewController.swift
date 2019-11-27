@@ -98,6 +98,9 @@ class HomeViewController: UIViewController {
         // Adds listener for side menu closed definitely
         NotificationCenter.default.addObserver(self, selector: #selector(onDidCloseDefinitely(_:)), name: .didCloseDefinitely, object: nil)
         
+        // Adds listener for report format menu closed definitely
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidCloseReport(_:)), name: .didCloseReport, object: nil)
+        
         // Custom back nav bar button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
@@ -289,6 +292,9 @@ class HomeViewController: UIViewController {
         }
     }
     
+
+    
+    
     // Closes categoryMenu
     @IBAction func didCloseCatMenu(_ sender: Any) {
         navigationController?.navigationBar.isHidden = false
@@ -391,6 +397,11 @@ class HomeViewController: UIViewController {
         closeMenuDefinitely(self)
     }
     
+    @objc func onDidCloseReport(_ notification: Notification) {
+        didCloseSubCatMenu(self)
+        didCloseCatMenu(self)
+    }
+    
     func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -451,4 +462,5 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 extension Notification.Name {
     static let didCloseDefinitely = Notification.Name("didCloseDefinitely")
+    static let didCloseReport = Notification.Name("didCloseReport")
 }
