@@ -27,11 +27,14 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var levelButton: UIButton!
     @IBOutlet weak var menuTransparentView: UIView!
+    @IBOutlet weak var imageBack: UIImageView!
     
     // Detailed Report Menu
     @IBOutlet weak var detailedReport: UIView!
     @IBOutlet weak var detailedReportHeader: UIView!
     @IBOutlet weak var detailedReportBottom: NSLayoutConstraint!
+    @IBOutlet weak var textBoxView: UIView!
+    @IBOutlet weak var imageButton: UIButton!
     
     
     
@@ -159,7 +162,8 @@ class HomeViewController: UIViewController {
         detailedReportHeader.layer.shadowOpacity = 0
         detailedReportHeader.layer.shadowRadius = 3
         detailedReportHeader.layer.shadowOffset = CGSize(width: 0, height: -5)
-        
+        textBoxView.layer.cornerRadius = cornerR
+        imageButton.layer.cornerRadius = cornerR
         
         
     // MARK: - SIDE MENU ELEMENTS
@@ -168,6 +172,7 @@ class HomeViewController: UIViewController {
         mapView.layer.cornerRadius = cornerR
         levelButton.layer.cornerRadius = 0.5 * levelButton.bounds.width
         menuTransparentView.layer.cornerRadius = cornerR
+        imageBack.layer.cornerRadius = imageBack.bounds.width * 0.5
         
     // MARK: - CATEGORY MENU ELEMENTS
         
